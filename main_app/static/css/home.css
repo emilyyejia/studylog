@@ -41,9 +41,18 @@
   color: #333;
 }
 .big-button {
-  font-size: 2rem;        /* bigger font */
-  padding: 14px 32px;     /* bigger padding */
-  min-width: 180px;       /* wider button */
-  height: 56px;           /* taller button */
-  border-radius: 10px;    /* optional rounded corners */
+  font-size: 2.4rem;               /* even bigger font */
+  padding: 18px 36px;              /* bigger padding */
+  min-width: 220px;                /* wider button */
+  height: 64px;                    /* taller button */
+  border-radius: 12px;             /* more rounded corners */
+  background-color: lightgreen;   /* light green background */
+  color: white;                   /* white text */
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  margin: 4rem auto 0;
+  box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2); /* optional subtle shadow */
+  transition: background-color 0.3s ease;
 }
