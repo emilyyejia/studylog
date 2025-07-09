@@ -1,24 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="problem-detail" style="max-width: 700px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">
+<section
+  class="problem-detail"
+  style="
+    max-width: 900px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  "
+>
+  <div style="display: flex; gap: 2rem; align-items: flex-start">
+    <div style="flex: 1; border-right: 1px solid #ddd; padding-right: 2rem">
+      <h1 style="color: #048810; font-size: 2.4rem">{{ problem.category }}</h1>
+      <p class="grade" style="font-size: 1.4rem; margin-bottom: 1rem">
+        Grade: <strong>{{ problem.grade }}</strong>
+      </p>
 
-  <h1 style="color: #048810;">{{ problem.category }}</h1>
-  <p class="grade" style="font-size: 1.4rem; margin-bottom: 1rem;">
-    Grade: <strong>{{ problem.grade }}</strong>
-  </p>
+      <div class="description" style="font-size: 1.6rem; color: #222">
+        <p>{{ problem.description }}</p>
+      </div>
 
-  <div class="description" style="font-size: 1.6rem; color: #222; margin-bottom: 2rem;">
-    <p>{{ problem.description }}</p>
+      <div class="problem" style="margin: 1.5rem 0; display: flex; gap: 12px;">
+        <a href="{% url 'problem-update' problem.id %}" class="btn warn">Edit</a>
+        <a href="{% url 'problem-delete' problem.id %}" class="btn danger">Delete</a>
+      </div>
+
+      <h3 style="font-size: 1.6rem; color: #333; margin-bottom: 0.5rem;">Add a Translation</h3>
+      <form action="{% url 'add-translation' problem.id %}" method="post" class="subsection-content" autocomplete="off" style="margin-bottom: 1.5rem">
+        {% csrf_token %}
+        {{ translation_form.as_p }}
+        <button type="submit" class="btn submit">Submit</button>
+      </form>
+    </div>
+
+    <div style="flex: 1; padding-left: 2rem">
+      <h2 class="section-heading" style="font-size: 2rem; color: #048810; margin-bottom: 1rem">
+        Translations
+      </h2>
+
+      <div class="translation-list" style="display: flex; flex-direction: column; gap: 1.5rem">
+        {% for translation in problem.translation_set.all %}
+        <div class="translation-card" style="background: #e6f5e6; border-radius: 10px; padding: 1rem">
+          <div class="lang" style="font-weight: 700; font-size: 1.4rem; color: #2d6a2d; margin-bottom: 0.5rem;">
+            {{ translation.language }}
+          </div>
+          <div class="text" style="font-size: 1.3rem; color: #333; white-space: pre-wrap">
+            {{ translation.translated_text }}
+          </div>
+        </div>
+        {% empty %}
+        <p style="font-size: 1.2rem; color: #666">No translations available.</p>
+        {% endfor %}
+      </div>
+
+      <!-- Back to Problems button aligned to the right -->
+      <div style="margin-top: 2rem; text-align: right;">
+        <a href="{% url 'problem_index' %}" class="btn btn-green">Back to Problems</a>
+      </div>
+    </div>
   </div>
-
-  <div class="problem" style="display: flex; justify-content: center; gap: 12px; margin-bottom: 20px;">
-    <a href="{% url 'problem-update' problem.id %}" class="btn warn">Edit</a>
-    <a href="{% url 'problem-delete' problem.id %}" class="btn danger">Delete</a>
-  </div>
-
-  <a href="{% url 'problem_index' %}" class="btn btn-green" style="display: inline-block; margin-top: 1rem;">
-    Back to Problems
-  </a>
-
 </section>
 {% endblock %}

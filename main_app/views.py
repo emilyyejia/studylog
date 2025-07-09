@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from .models import Problem
+from .forms import TranslationForm
 
 def home(request):
     return  render(request, 'home.html')
@@ -15,7 +16,19 @@ def problem_index(request):
 
 def problem_detail(request, problem_id):
     problem = Problem.objects.get(id=problem_id)
-    return render(request, 'problems/detail.html', {'problem': problem})
+    translation_form = TranslationForm()
+    return render(request, 'problems/detail.html', {
+        'problem': problem, 'translation_form': translation_form
+    })
+
+def add_translation(request, problem_id):
+    form = TranslationForm(request.POST)
+    if form.is_valid():
+        new_translation = form.save(commit = False)
+        new_translation.problem_id = problem_id
+        new_translation.save()
+    return redirect('problem_detail', problem_id= problem_id)
+
 
 class ProblemAdd(CreateView):
     model = Problem
@@ -28,3 +41,4 @@ class ProblemUpdate(UpdateView):
 class ProblemDelete(DeleteView):
     model = Problem
     success_url = '/problems/'
+

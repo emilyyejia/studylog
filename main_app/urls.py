@@ -9,4 +9,5 @@ urlpatterns = [
     path('problems/add', views.ProblemAdd.as_view(), name='problem-add'),
     path('problems/<int:pk>/update/', views.ProblemUpdate.as_view(), name='problem-update'),
     path('problems/<int:pk>/delete/', views.ProblemDelete.as_view(), name='problem-delete'),
+    path('problems/<int:problem_id>/add-translation/', views.add_translation, name='add-translation'),
 ]
