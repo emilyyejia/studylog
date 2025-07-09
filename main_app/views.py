@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse
-from .models import Problem
+from django.views.generic import ListView, DetailView
+from .models import Problem, Tag
 from .forms import TranslationForm
 
 def home(request):
@@ -42,3 +42,20 @@ class ProblemDelete(DeleteView):
     model = Problem
     success_url = '/problems/'
 
+class TagCreate(CreateView):
+    model = Tag
+    fields = '__all__'
+
+class TagList(ListView):
+    model = Tag
+
+class TagDetail(DetailView):
+    model = Tag
+
+class TagUpdate(UpdateView):
+    model = Tag
+    fields = ['name', 'color']
+
+class TagDelete(DeleteView):
+    model = Tag
+    success_url = '/tags/'

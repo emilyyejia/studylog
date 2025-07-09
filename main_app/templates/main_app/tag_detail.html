@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<style>
+  .tag-detail-wrapper {
+    max-width: 350px;  /* narrower */
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  .tag-card {
+    background-color: {{ tag.color }};
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .tag-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  }
+
+  .tag-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .tag-actions {
+    max-width: 350px;
+    margin: 1.5rem auto 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .btn {
+    min-width: 100px; /* make buttons wider and equal width */
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="tag-detail-wrapper">
+  <div class="tag-card">
+    <div class="tag-name">{{ tag.name }}</div>
+  </div>
+</div>
+
+<div class="tag-actions">
+  <a href="{% url 'tag-update' tag.id %}" class="btn warn">Edit</a>
+  <a href="{% url 'tag-delete' tag.id %}" class="btn danger">Delete</a>
+</div>
+{% endblock %}
