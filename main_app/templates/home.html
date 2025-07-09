@@ -1,20 +1,30 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'css/home.css' %}"
-/>
-{% endblock %} 
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 {% block content %}
-
-<section class="logo-container">
-  <div class="cat-container">
-    <img
-      src="{% static 'images/coin.jpg'' %}"
-      alt="The Cat Collector Cat"
-    />
+<section class="home-intro">
+  <h1>Welcome to Math Problem Collector</h1>
+  <p class="tagline">
+    A simple and fun tool for collecting, organizing, and practicing math problems.
+  </p>
+  
+  <div class="features">
+    <div class="feature">
+      <h2>📚 Collect Problems</h2>
+      <p>Store your favorite math questions in one place, organized by topic or level.</p>
+    </div>
+    <div class="feature">
+      <h2>🧮 Practice Anytime</h2>
+      <p>Use your collection to review and solve problems when you have a few minutes to spare.</p>
+    </div>
+    <div class="feature">
+      <h2>🧠 Learn & Grow</h2>
+      <p>Build your math skills step by step through real examples and your personal library.</p>
+    </div>
   </div>
-</section>
 
+  <a href="/problems" class="btn btn-green big-button">Start Exploring</a>
+</section>
 {% endblock %}

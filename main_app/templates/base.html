@@ -1,26 +1,25 @@
-{% load  static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/coin.jpg'%}" />
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <title>Price Collector</title>
+    <link rel="shortcut icon" type="image/png" href="" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <title>Math Problems Collector</title>
     {% block head %} 
     {% endblock %}
   </head>
   <body>
     <header>
       <div class="header-logo-container">
-        <a href="/">
-          <img src="{% static 'images/coin.jpg' %}" alt="The Price Collector Logo" class="logo-img"/>
+        <a href="{% url 'home'%}">
+          <img src="{% static 'img/logo.jpg' %}" alt="The Math Problems Collector Logo" class="logo-img" />
         </a>
       </div>
       <nav>
         <ul>
-          <li><a href="/price">All</a></li>
           <li><a href="/about">About</a></li>
         </ul>
       </nav>
