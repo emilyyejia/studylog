@@ -125,7 +125,7 @@ p {
 /* Buttons */
 .btn {
   padding: 0.8rem 1.6rem;
-  background-color: var(--green);
+  background-color: rgb(4, 216, 4);
   color: #fff;
   border: none;
   border-radius: var(--radius);

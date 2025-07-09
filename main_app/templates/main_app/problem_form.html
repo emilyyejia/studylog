@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/problem_form.css' %}">
+{% endblock %}
+{% block content %}
+<section class="form-container">
+    {% if problem %}
+    <h1 class="form-title">Update this {{ problem.category}} Problem</h1>
+    {% else %}
+  <h1 class="form-title">Add a New Math Problem</h1>
+  {% endif %}
+  <p class="form-subtitle">Fill out the form below to contribute a fun and educational math problem.</p>
+
+  <form method="POST" class="problem-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn-submit">Save Problem</button>
+  </form>
+</section>
+{% endblock %}

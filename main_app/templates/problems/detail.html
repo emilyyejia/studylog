@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<section class="problem-detail">
-  <h1>{{ problem.category }}</h1>
-  <p class="grade">Grade: <strong>{{ problem.grade }}</strong></p>
-  <div class="description">
+<section class="problem-detail" style="max-width: 700px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">
+
+  <h1 style="color: #048810;">{{ problem.category }}</h1>
+  <p class="grade" style="font-size: 1.4rem; margin-bottom: 1rem;">
+    Grade: <strong>{{ problem.grade }}</strong>
+  </p>
+
+  <div class="description" style="font-size: 1.6rem; color: #222; margin-bottom: 2rem;">
     <p>{{ problem.description }}</p>
   </div>
 
-  <a href="{% url 'problem_index' %}" class="btn btn-green"> Back to Problems</a>
+  <div class="problem" style="display: flex; justify-content: center; gap: 12px; margin-bottom: 20px;">
+    <a href="{% url 'problem-update' problem.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'problem-delete' problem.id %}" class="btn danger">Delete</a>
+  </div>
+
+  <a href="{% url 'problem_index' %}" class="btn btn-green" style="display: inline-block; margin-top: 1rem;">
+    Back to Problems
+  </a>
+
 </section>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="confirm-delete">
+  <h1>Confirm Delete</h1>
+  <p>Are you sure you want to delete the problem in category <strong>{{ problem.category }}</strong> (Grade {{ problem.grade }})?</p>
+
+  <form method="POST" action="{% url 'problem-delete' problem.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn danger" style="margin-right: 10px;">Yes, Delete</button>
+    <a href="{% url 'problem_detail' problem.id %}" class="btn secondary">Cancel</a>
+  </form>
+</section>
+{% endblock %}
