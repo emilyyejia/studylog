@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="problem-detail">
+  <h1>{{ problem.category }}</h1>
+  <p class="grade">Grade: <strong>{{ problem.grade }}</strong></p>
+  <div class="description">
+    <p>{{ problem.description }}</p>
+  </div>
+
+  <a href="{% url 'problem_index' %}" class="btn btn-green"> Back to Problems</a>
+</section>
+{% endblock %}

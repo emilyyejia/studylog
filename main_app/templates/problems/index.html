@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block content %}
+<section class="problem-index">
+  <h1 class="page-title">Explore Math Problems</h1>
+  <p class="tagline">
+    Browse through fun and educational problems by category and grade!
+  </p>
+
+  <div class="problem-list">
+    {% for problem in problems %}
+    <a href="{% url 'problem_detail' problem.id %}">
+      <div class="problem-card">
+        <h2 class="category">{{ problem.category }}</h2>
+        <h3 class="grade">Grade: {{ problem.grade }}</h3>
+      </div>
+    </a>
+    {% empty %}
+    <p>No problems available.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
