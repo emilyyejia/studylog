@@ -16,9 +16,11 @@ def problem_index(request):
 
 def problem_detail(request, problem_id):
     problem = Problem.objects.get(id=problem_id)
+    tag_problem_has = problem.tags.all().values_list('id')
+    tags = Tag.objects.exclude(id__in=tag_problem_has)
     translation_form = TranslationForm()
     return render(request, 'problems/detail.html', {
-        'problem': problem, 'translation_form': translation_form
+        'problem': problem, 'translation_form': translation_form, 'tags':tags
     })
 
 def add_translation(request, problem_id):
@@ -32,7 +34,7 @@ def add_translation(request, problem_id):
 
 class ProblemAdd(CreateView):
     model = Problem
-    fields = '__all__'
+    fields = ['category', 'grade', 'description']
 
 class ProblemUpdate(UpdateView):
     model = Problem
@@ -59,3 +61,13 @@ class TagUpdate(UpdateView):
 class TagDelete(DeleteView):
     model = Tag
     success_url = '/tags/'
+
+def associate_tag(request, problem_id, tag_id):
+    problem = Problem.objects.get(id=problem_id)
+    problem.tags.add(tag_id)
+    return redirect('problem_detail', problem_id=problem_id)
+
+def remove_tag(request, problem_id, tag_id):
+    problem = Problem.objects.get(id=problem_id)
+    problem.tags.remove(tag_id)
+    return redirect('problem_detail', problem_id=problem_id)
