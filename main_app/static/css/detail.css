@@ -52,3 +52,43 @@
   text-decoration: none;
 }
 
+
+#id_translated_text {
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #b2e2b2;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+  width: 100%;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+  margin-bottom: 1.2rem;
+}
+
+#id_language {
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #b2e2b2;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+  width: 30%;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+  margin-bottom: 1.2rem;
+}
+
+#id_language{
+  height: 30px;
+}
+
+
+#id_translated_text {
+  height: 100px;
+}
+
+
+.subsection-content p label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}

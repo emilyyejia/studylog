@@ -1,19 +1,18 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
-  <link rel="stylesheet" href="{% static 'css/detail.css' %}">
-{% endblock %}
-{% block content %}
-<section class="problem-detail" style="
-  max-width: 1500px;
-  margin: 2rem auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-">
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+{% endblock %} {% block content %}
+<section
+  class="problem-detail"
+  style="
+    max-width: 1500px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  "
+>
   <div style="display: flex; gap: 2rem; align-items: flex-start">
-    <!-- Left Column -->
     <div style="flex: 1; border-right: 1px solid #ddd; padding-right: 2rem">
       <h1 style="color: #048810; font-size: 2.4rem">{{ problem.category }}</h1>
       <p class="grade" style="font-size: 1.4rem; margin-bottom: 1rem">
@@ -24,66 +23,114 @@
         <p>{{ problem.description }}</p>
       </div>
 
-      <div class="problem" style="margin: 1.5rem 0; display: flex; justify-content: space-between;">
-        <a href="{% url 'problem-update' problem.id %}" class="btn small">Edit</a>
-        <a href="{% url 'problem-delete' problem.id %}" class="btn small">Delete</a>
+      <div
+        class="problem"
+        style="margin: 1.5rem 0; display: flex; justify-content: space-between"
+      >
+        <a href="{% url 'problem-update' problem.id %}" class="btn small"
+          >Edit</a
+        >
+        <a href="{% url 'problem-delete' problem.id %}" class="btn small"
+          >Delete</a
+        >
       </div>
 
-      <!-- TAGS Section -->
-      <section class="tags" style="margin-top: 2rem;">
-  <h2 style="font-size: 1.6rem; color: #333;">Tags</h2>
-  
-  <!-- Assigned Tags -->
-  <div class="tag-row">
-    {% for tag in problem.tags.all %}
-    <form action="{% url 'remove-tag' problem.id tag.id %}" method="post" class="tag-form badge-btn-container">
-      {% csrf_token %}
-      <button type="submit" class="badge-btn" style="background-color: {{ tag.color }};">
-        {{ tag.name }} &times;
-      </button>
-    </form>
-    {% empty %}
-    <p class="no-tags">This problem doesn't have any tags!</p>
-    {% endfor %}
-  </div>
+      <section class="tags" style="margin-top: 2rem">
+        <h2 style="font-size: 1.6rem; color: #333">Tags</h2>
 
-  <h3 style="margin-top: 1.5rem; font-size: 1.4rem; color: #555;">Available Tags</h3>
-  
-  <!-- Available Tags -->
-  <div class="tag-row">
-    {% for tag in tags %}
-    <form action="{% url 'associate-tag' problem.id tag.id %}" method="post" class="tag-form badge-btn-container">
-      {% csrf_token %}
-      <button type="submit" class="badge-btn" style="background-color: {{ tag.color }};">
-        + {{ tag.name }}
-      </button>
-    </form>
-    {% empty %}
-    <p class="all-tags">This problem already has all tags.</p>
-    {% endfor %}
-  </div>
-</section>
+        <div class="tag-row">
+          {% for tag in problem.tags.all %}
+          <form
+            action="{% url 'remove-tag' problem.id tag.id %}"
+            method="post"
+            class="tag-form badge-btn-container"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              class="badge-btn"
+              style="background-color: {{ tag.color }};"
+            >
+              {{ tag.name }} &times;
+            </button>
+          </form>
+          {% empty %}
+          <p class="no-tags">This problem doesn't have any tags!</p>
+          {% endfor %}
+        </div>
 
+        <h3 style="margin-top: 1.5rem; font-size: 1.4rem; color: #555">
+          Available Tags
+        </h3>
 
-      <!-- Translation Form -->
-      <h3 style="font-size: 1.6rem; color: #333; margin-top: 2rem;">Add a Translation</h3>
-      <form action="{% url 'add-translation' problem.id %}" method="post" class="subsection-content" autocomplete="off" style="margin-bottom: 1.5rem">
-        {% csrf_token %}
-        {{ translation_form.as_p }}
+        <div class="tag-row">
+          {% for tag in tags %}
+          <form
+            action="{% url 'associate-tag' problem.id tag.id %}"
+            method="post"
+            class="tag-form badge-btn-container"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              class="badge-btn"
+              style="background-color: {{ tag.color }};"
+            >
+              + {{ tag.name }}
+            </button>
+          </form>
+          {% empty %}
+          <p class="all-tags">This problem already has all tags.</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <h3 style="font-size: 1.6rem; color: #1be41e; margin-top: 2rem">
+        Add a Translation
+      </h3>
+      <form
+        action="{% url 'add-translation' problem.id %}"
+        method="post"
+        class="subsection-content"
+        autocomplete="off"
+        style="margin-bottom: 1.5rem"
+      >
+        {% csrf_token %} {{ translation_form.as_p }}
         <button type="submit" class="btn submit">Submit</button>
       </form>
     </div>
 
-    <!-- Right Column: Translations -->
     <div style="flex: 1; padding-left: 2rem">
-      <h2 class="section-heading" style="font-size: 2rem; color: #048810; margin-bottom: 1rem">Translations</h2>
-      <div class="translation-list" style="display: flex; flex-direction: column; gap: 1.5rem">
+      <h2
+        class="section-heading"
+        style="font-size: 2rem; color: #048810; margin-bottom: 1rem"
+      >
+        Translations
+      </h2>
+      <div
+        class="translation-list"
+        style="display: flex; flex-direction: column; gap: 1.5rem"
+      >
         {% for translation in problem.translation_set.all %}
-        <div class="translation-card" style="background: #e6f5e6; border-radius: 10px; padding: 1rem">
-          <div class="lang" style="font-weight: 700; font-size: 1.4rem; color: #2d6a2d; margin-bottom: 0.5rem;">
+        <div
+          class="translation-card"
+          style="background: #e6f5e6; border-radius: 10px; padding: 1rem"
+        >
+          <div
+            class="lang"
+            style="
+              font-weight: 700;
+              font-size: 1.4rem;
+              color: #2d6a2d;
+              margin-bottom: 0.5rem;
+            "
+          >
             {{ translation.language }}
           </div>
-          <div class="text" style="font-size: 1.3rem; color: #333; white-space: pre-wrap">
+          <div
+            class="text"
+            style="font-size: 1.3rem; color: #333; white-space: pre-wrap"
+          >
             {{ translation.translated_text }}
           </div>
         </div>
@@ -92,9 +139,10 @@
         {% endfor %}
       </div>
 
-      <!-- Back Button -->
       <div style="margin-top: 2rem; text-align: right">
-        <a href="{% url 'problem_index' %}" class="btn btn-green">Back to Problems</a>
+        <a href="{% url 'problem_index' %}" class="btn btn-green"
+          >Back to Problems</a
+        >
       </div>
     </div>
   </div>
